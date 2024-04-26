@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!--JS VUE Script-->
+	<script src="https://unpkg.com/vue@3"></script>
+	<!-- Axios -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.js"></script>
+	<!-- Bootstrap - Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<!--My CSS-->
+	<link rel="stylesheet" href="style.css">
+	<title>Borger Regi Web app</title>
+</head>
+
+<body>
+	<div id="BorgerRegi" class="container">
+		<h3 class="display-4 text-center">Registreringsside</h3>
+		<hr>
+			<p class="">Her skal du ind og udregistrerer dig dagligt,
+				tryk på en knap nedenfor:</p>
+			<p>En besked til borger om date og tid til borgeren om registreringen</p>
+
+		<div class="row">
+			<div class="col-6-sm p-1">
+				<p><i class=""><b>Ind & Ud registrering</b></i></p>
+				<button type="button" class="btn btn-outline-primary btn-lg">Ind Registrering</button>
+				<br>
+				<br>
+				<button type="button" class="btn btn-outline-info btn-lg">Ud Registrering</button>
+				<hr>
+				<p><i><b>Pause registrering</b></i></p>
+				<button type="button" class="btn btn-outline-primary btn-lg">Pause start</button>
+				<br>
+				<br>
+				<button type="button" class="btn btn-outline-success btn-lg">Pause slut</button>
+
+		</div>
+		<div class="col-6-sm">
+				<div class="opacity-25">
+				     <img src="img/Registration.jpeg">
+				</div>
+		</div>
+	</div>
+	<!-- Javascript-reference -->
+	<script src="BorgerRegi.js"></script>
+</body>
+
+</html>
