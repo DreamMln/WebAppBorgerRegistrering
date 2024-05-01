@@ -10,7 +10,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.js"></script>
 	<!-- Bootstrap - Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-	<title>Borger regi app</title>
+	<title>Opret borger registreringer</title>
 </head>
 
 <body>
@@ -22,7 +22,7 @@
 
 					  </div>
 				  <div class="col-6 bg-success p-2">
-					<form @submit.prevent="login">
+					<form @submit.prevent="getByTlfBorger(tlf)">
 						<div class="form-group">
 						  <label for="tlf"><b>Tlf.nr.</b></label>
 						  <input v-model="tlf" type="text" class="form-control" id="exampleInputtlf1" aria-describedby="emailHelp" placeholder="Indtast tlf...">

@@ -5,31 +5,28 @@ const app = Vue.createApp({
         return {
             borgerTlf: [], //tomt array til at indeholde data omkring borger
 			tlf: "",
+			id: 0,
 			outPutMessage: "",
 		}
     },
 	created(){ // life cycle method. Called when browser reloads page
 
 	},
-	methods:
-	{
-		async login(){
+	methods:{
+		async getByTlfBorger(tlf){
 		try{
-		  const response = await axios.post(baseUrl,
-			{
-			tlf: this.tlf
-		    });
-		  console.log(response.data);
-		  this.outPutMessage = response.data;
-		  window.location.href = "/BorgerRegi.html";
+		  const result = await axios.post(baseUrl + "/" + tlf + "/" + "BorgerTlf?tlf=" + tlf,
+		  { tlf: this.tlf });
+		  console.log(result.data);
+		  this.outPutMessage = result.data
+		  window.location.href = "/BorgerRegi.html?tlf=" + tlf;
 		  } catch (ex) {
 			// Handle error
 			{
-				alert("Du kan ikke logges ind, der er en fejl! " + ex.message)
+				alert("Du er allerede logget ind med tlf! ... "  + ex.message)
 			}
 		  }
 	    },
-            //location.href="/borgerRegi.html?id=" + borgerID
 	}
 
 }).mount("#app") //her bliver appen mounted
