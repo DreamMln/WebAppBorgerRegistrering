@@ -17,37 +17,42 @@
 	<div id="app" class="container">
 		<h3 class="display-4 text-center">Login borger</h3>
 		<hr>
-				<div class="row">
-					<div class="col-3">
+<div class="row">
+	<div class="col-3"></div>
+		<div class="col-6 bg-success p-2 ">
+			<div id="message">
+				Input feltet skal indeholde:
+				<br>
+				<i id="number" class="invalid">- Numre</i>
+				<br>
+				<i id="length" class="invalid">- 8 cifre</i>
+			  </div>
+			  <br>
+			<form @submit.prevent="getByTlfBorger(tlf)">
+				<div class="form-group">
+					<label for="tlf"><b>Tlf. Nummer:</b></label>
+					<input v-model="tlf" type="password" placeholder="Indtast tlf..."
+					class="form-control" id="tlflogin" aria-describedby="tlf"
+					pattern="[0-9]{3}[0-9]{2}[0-9]{3}"
+					title="Skal indeholde formatet XXXXXXXX" required>
 
-					  </div>
-				  <div class="col-6 bg-success p-2">
-					<form @submit.prevent="getByTlfBorger(tlf)">
-						<div class="form-group">
-						  <label for="tlf"><b>Tlf.nr.</b></label>
-						  <input v-model="tlf" type="text" class="form-control" id="exampleInputtlf1" aria-describedby="emailHelp" placeholder="Indtast tlf...">
-						</div>
-						<button type="submit" class="btn btn-light">Log ind</button>
-					  </form>
-						{{ outPutMessage }}
-				  </div>
-				  <div class="col-3">
-				  </div>
 				</div>
-				<div class="row">
-				  <div class="col-3">
-				  </div>
-				  <div class="col-6 p-2 bg-success">
-					<img src="img/ros.png" class="img-fluid" alt="Responsive image">
-				  </div>
-				  <div class="col-3">
-
-				  </div>
-				</div>
+				<button type="submit" class="btn btn-light">Log ind</button>
+			</form>
+			{{ outPutMessage }}
 		</div>
+	<div class="col-3">
 	</div>
-	<!-- Javascript-reference -->
-	<script src="script.js"></script>
+</div>
+<div class="row">
+	<div class="col-3">
+		</div>
+			<div class="col-6 p-2 bg-success">
+				<img src="img/ros.png" class="img-fluid" alt="Responsive image">
+			</div>
+		<div class="col-3"></div>
+</div></div>
+<!-- Javascript-reference -->
+<script src="script.js"></script>
 </body>
-
 </html>

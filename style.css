@@ -17,3 +17,45 @@
 	img {
 		opacity: 0.5;
 	  }
+/* ////LOGIN///// */
+/* Message box vises når en bruger klikker i input feltet */
+#message {
+	display:none;
+	background: #f1f1f1;
+	color: #000;
+	position: relative;
+	padding: 20px;
+	margin-top: 10px;
+  }
+  #message p {
+	padding: 10px 35px;
+	font-size: 18px;
+  }
+  /* En grøn tekst samt et checkmark når requirements er korrekte */
+.valid {
+	color: green;
+  }
+  .valid:before {
+	position: relative;
+	left: -35px;
+	content: "&#10004;";
+  }
+  /* En rød tekst og et "x" icon kommer, når requirements ikke er mødt */
+.invalid {
+	color: red;
+  }
+  .invalid:before {
+	position: relative;
+	left: -35px;
+	content: "&#10006;";
+  }
+
+button.baggrund{
+	background-color: rgb(212, 238, 212);
+
+}
+
+/* div.col.baggrund{
+	border: 1px;
+	background-color: rgb(212, 238, 212);
+} */

@@ -10,6 +10,11 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.js"></script>
 	<!-- Bootstrap - Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<!-- ny cdn link moment.js -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+	<!--moment library-->
+	<script src="https://momentjs.com/downloads/moment.js"></script>
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script> -->
 	<!--My CSS-->
 	<link rel="stylesheet" href="style.css">
 	<title>Indtast registreringer</title>
@@ -17,58 +22,82 @@
 
 <body>
 	<div id="BorgerRegi" class="container">
-		<h3 class="display-4 text-center">Registreringsside</h3>
+		<h3 class="display-4">Registreringsside</h3>
 		<hr>
-			<p class=""><b>Velkommen  {{ outputTlfData.tlf }}</b>
+			<p class=""><b>Velkommen borger med tlf. {{ outputTlfData.tlf }}</b>
 				<br>
 				Her skal du ind og udregistrerer dig dagligt,
-				tryk på en knap nedenfor:
+				tryk på den relevante knap nedenfor:
 			</p>
-		<p>En besked til borger om date og tid til borgeren om registreringen</p>
-					<b>ID</b>: {{ outputTlfData.id }}
+		<i>En besked til borger om date og tid sendes til borgeren </i>
+		<hr>
+
+		<b>ID</b>: {{ outputTlfData.id }}
 					<br>
 					<b>Tlf</b>: {{ outputTlfData.tlf }}
 					<br>
 					<b>Navn</b>: {{ outputTlfData.navn }}
 					<br>
-					<br>
 				<!-- </div> -->
 		<div class="row">
-
-		<div v-for="regi in registrArray" class="col-6-sm p-1">
-		<p><i class=""><b>Ind & Ud registrering</b></i></p>
-			<button type="button"
-				v-on:click="opretRegistr()"
-				class="btn btn-outline-primary btn-lg">
-				Ind
-		    </button>
-			{{ regi.ind }}
+			<div class="col-6">
+				<hr>
+	<p><b>Ind & Ud registrering</b></p>
+	<!-- <input type="date" :value="date"> -->
+	<button v-on:click="sendRegi(outputTlfData.id)" type="button" class="btn btn-light baggrund">
+		Ind
+	</button>
+	{{	this.borgerRegistreringer.ind  }}
+	<!-- {{	addMessage }} -->
+		<br>
+		<br>
+	<button v-on:click="sendRegi(outputTlfData.id)" type="button" class="btn btn-light baggrund">
+		Ud
+	</button>
+	{{	this.borgerRegistreringer.ud  }}
+	<br>
+	<br>
+	<p><b>Pause registrering</b></p>
+	<button v-on:click="sendPause(outputTlfData.id)"
+	type="button" class="btn btn-light baggrund">
+		Start
+	</button>
+	{{	this.borgerRegistreringer.borgerPauser.pauseStart  }}
+	<br>
+	<br>
+	<button v-on:click="sendPause(outputTlfData.id)"
+	type="button" class="btn btn-light baggrund">
+		Slut
+	</button>
+	{{	this.borgerRegistreringer.borgerPauser.pauseSlut  }}
+	<div class="row">
+		<div v-for="regi in registrArray" class="col-sm-4">
+			<div class="card">
+			<b>Indregistreringer:</b> {{ regi.ind }}
+			<b>Udregistreringer:</b> {{ regi.ud }}
+			</div>
 			<br>
-				<button type="button"
-					v-on:click="opretRegistr()"
-					class="btn btn-outline-info btn-lg">
-					Ud
-			    </button>
-				{{ regi.ud }}
-				<br>
-				    <div v-for="pause in regi.borgerPauser">
-					<p><i><b>Pause registrering</b></i></p>
-						<button type="button"
-						v-on:click="opretRegistr()"
-						class="btn btn-outline-primary btn-lg">Pause start</button>
-						{{	regi.borgerPauser.startPause  }}
-						<br>
-						<button type="button"
-						v-on:click="opretRegistr()"
-						class="btn btn-outline-success btn-lg">Pause slut</button>
-						{{	regi.borgerPauser.slutPause  }}
-		             </div>
-					</div>
+			<br>
+		</div>
+	</div>
+		<!-- <p><i><b>Pause registrering</b></i></p>
+		<button v-on:click="sendRegi(outputTlfData.id)"
+				type="button">Pause start</button>
+			{{ borgerRegistreringer.borgerPauser.pauseStart }}
+				{{addMessage }} -->
+			<br>
+			<!-- <button v-on:click="sendRegi(outputTlfData.id)"
+				type="button">Pause slut</button>
+			{{ borgerRegistreringer.borgerPauser.pauseSlut }}
+				{{addMessage }} -->
+			<br>
 
+	    </div>
 		<div class="col-6-sm">
 				<div class="opacity-25">
 				     <img src="img/Registration.jpeg">
 				</div>
+		</div>
 		</div>
 	</div>
 	<!-- Javascript-reference -->
