@@ -1,57 +1,25 @@
-.gradient-custom {
-	/* fallback for old browsers */
-	background: #6a11cb;
-
-	/* Chrome 10-25, Safari 5.1-6 */
-	background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
-
-	/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-	background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
-	}
-
+body {
+	background-image: url('img/D.png');
+  }
+  h3 {
+	text-shadow: 2px 2px #015c27;
+  }
+  h2 {
+	text-shadow: 2px 2px #097536;
+  }
 	.img-fluid {
 		min-width: 100%;
 		height: auto;
 	}
 
 	img {
-		opacity: 0.5;
+		opacity: 0.6;
 	  }
 /* ////LOGIN///// */
-/* Message box vises når en bruger klikker i input feltet */
-#message {
-	display:none;
-	background: #f1f1f1;
-	color: #000;
-	position: relative;
-	padding: 20px;
-	margin-top: 10px;
-  }
-  #message p {
-	padding: 10px 35px;
-	font-size: 18px;
-  }
-  /* En grøn tekst samt et checkmark når requirements er korrekte */
-.valid {
-	color: green;
-  }
-  .valid:before {
-	position: relative;
-	left: -35px;
-	content: "&#10004;";
-  }
-  /* En rød tekst og et "x" icon kommer, når requirements ikke er mødt */
-.invalid {
-	color: red;
-  }
-  .invalid:before {
-	position: relative;
-	left: -35px;
-	content: "&#10006;";
-  }
 
 button.baggrund{
 	background-color: rgb(212, 238, 212);
+	color: black;
 
 }
 
@@ -59,3 +27,31 @@ button.baggrund{
 	border: 1px;
 	background-color: rgb(212, 238, 212);
 } */
+.container {
+	position: relative;
+	margin: 0 auto; /* Center it */
+  }
+
+  .container .content {
+	position: absolute; /* Position the background text */
+	bottom: 0; /* At the bottom. Use top:0 to append it to the top */
+	background: rgb(0, 0, 0); /* Fallback color */
+	background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
+	color: #f1f1f1; /* Grey text */
+	width: 100%; /* Full width */
+	padding: 20px; /* Some padding */
+  }
+
+
+  .watermarked {
+	display: block;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 42px;
+	left: 0px;
+	background-size: 100px 100px;
+	background-position: 30px 30px;
+	background-repeat: no-repeat;
+	opacity: 0.2;
+  }

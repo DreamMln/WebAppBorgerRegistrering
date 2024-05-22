@@ -22,7 +22,7 @@
 
 <body>
 	<div id="BorgerRegi" class="container">
-		<h3 class="display-4">Registreringsside</h3>
+		<h2 class="display-4 text-white">Registreringsside</h2>
 		<hr>
 			<p class=""><b>Velkommen borger med tlf. {{ outputTlfData.tlf }}</b>
 				<br>
@@ -39,64 +39,78 @@
 					<b>Navn</b>: {{ outputTlfData.navn }}
 					<br>
 				<!-- </div> -->
-		<div class="row">
-			<div class="col-6">
 				<hr>
-	<p><b>Ind & Ud registrering</b></p>
-	<!-- <input type="date" :value="date"> -->
-	<button v-on:click="sendRegi(outputTlfData.id)" type="button" class="btn btn-light baggrund">
-		Ind
-	</button>
-	{{	this.borgerRegistreringer.ind  }}
-	<!-- {{	addMessage }} -->
+
+		<div class="row">
+			<div class="col-6 border border-white border-left-0">
+				<blockquote class="blockquote">
+		<p class="mb-0">Dine registreringer</p>
+	</blockquote>
+	<button v-on:click="sendRegi(outputTlfData.id, 'ind')"
+	type="button" class="btn btn-success baggrund">Ind registrering</button>
+	<!-- {{	this.borgerRegistreringer.ind  }} -->
+	<br>
+	<br>
+	<button v-on:click="sendRegi(outputTlfData.id, 'ud')"
+	type="button" class="btn btn-primary baggrund">Ud registrering</button>
+	<!-- {{	this.borgerRegistreringer.ud  }} -->
 		<br>
 		<br>
-	<button v-on:click="sendRegi(outputTlfData.id)" type="button" class="btn btn-light baggrund">
-		Ud
-	</button>
-	{{	this.borgerRegistreringer.ud  }}
-	<br>
-	<br>
-	<p><b>Pause registrering</b></p>
-	<button v-on:click="sendPause(outputTlfData.id)"
-	type="button" class="btn btn-light baggrund">
-		Start
-	</button>
-	{{	this.borgerRegistreringer.borgerPauser.pauseStart  }}
-	<br>
-	<br>
-	<button v-on:click="sendPause(outputTlfData.id)"
-	type="button" class="btn btn-light baggrund">
-		Slut
-	</button>
-	{{	this.borgerRegistreringer.borgerPauser.pauseSlut  }}
 	<div class="row">
 		<div v-for="regi in registrArray" class="col-sm-4">
 			<div class="card">
-			<b>Indregistreringer:</b> {{ regi.ind }}
-			<b>Udregistreringer:</b> {{ regi.ud }}
+				 <!-- Conditionally render Indregistreringer if Udregistreringer is not present -->
+				 <div v-if="!regi.ud" class="border border-success">
+					<b>Ind-regi:</b>
+					{{ regi.ind }}
+				</div>
+				<div v-else class="border border-primary">
+					<b>Ud-regi:</b>
+					{{ regi.ud }}
+				</div>
 			</div>
-			<br>
 			<br>
 		</div>
 	</div>
-		<!-- <p><i><b>Pause registrering</b></i></p>
-		<button v-on:click="sendRegi(outputTlfData.id)"
-				type="button">Pause start</button>
-			{{ borgerRegistreringer.borgerPauser.pauseStart }}
-				{{addMessage }} -->
-			<br>
-			<!-- <button v-on:click="sendRegi(outputTlfData.id)"
-				type="button">Pause slut</button>
-			{{ borgerRegistreringer.borgerPauser.pauseSlut }}
-				{{addMessage }} -->
-			<br>
-
-	    </div>
-		<div class="col-6-sm">
-				<div class="opacity-25">
-				     <img src="img/Registration.jpeg">
+</div>
+<div class="col-6 border border-white border-right-0">
+	<blockquote class="blockquote">
+		<p class="mb-0">Dine pauser</p>
+	</blockquote>
+	<button v-on:click="sendPause(outputTlfData.id, 'pauseStart')"
+	type="button" class="btn btn-info baggrund">Pause start</button>
+	<!-- {{ borgerPauser.pauseStart }} -->
+	<br>
+	<br>
+	<button v-on:click="sendPause(outputTlfData.id, 'pauseSlut')"
+	type="button" class="btn btn-secondary baggrund">Pause slut</button>
+	<!-- {{ borgerPauser.pauseSlut }} -->
+		<br>
+		<br>
+		<div class="row">
+			<div v-for="pause in pauseArray" class="col-sm-4">
+				<!-- Conditionally render Pause information -->
+				<!-- Conditionally render pauseStart if pauseSlut is not present -->
+				<div class="card">
+					<div v-if="!pause.pauseSlut" class="border border-secondary">
+						<b>Start-pause:</b> {{  pause.pauseStart }}
+					</div>
+					<div v-else class="border border-info">
+						<b>Slut-pause:</b> {{ pause.pauseSlut }}
+					</div>
 				</div>
+				<br>
+			</div>
+		</div>
+		</div>
+	</div>
+	<br>
+	<br>
+	<br>
+		<div class="col-6-sm">
+				<!-- <div class="watermarked">
+				     <img class="watermarked" src="img/online.jpg">
+				</div> -->
 		</div>
 		</div>
 	</div>
