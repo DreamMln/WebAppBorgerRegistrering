@@ -15,6 +15,8 @@
 	<!--moment library-->
 	<script src="https://momentjs.com/downloads/moment.js"></script>
 	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script> -->
+	<!-- Add icon library -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<!--My CSS-->
 	<link rel="stylesheet" href="style.css">
 	<title>Indtast registreringer</title>
@@ -22,21 +24,29 @@
 
 <body>
 	<div id="BorgerRegi" class="container">
-		<h2 class="display-4 text-white">Registreringsside</h2>
+		<h2 class="display-4">Registreringsside</h2>
 		<hr>
-			<p class=""><b>Velkommen borger med tlf. {{ outputTlfData.tlf }}</b>
+			<p><b>Velkommen tlf. {{ outputTlfData.tlf }}</b>
 				<br>
-				Her skal du ind og udregistrerer dig dagligt,
-				tryk på den relevante knap nedenfor:
+				I dit praktikforløb, skal du bruge dette system til at registrere
+				arbejdstid og pauser.
+				<p>
+					Dine data, vil udelukkende blive brugt til, at evaluere
+					din praktik, og slettes efter 13 uger.
+				</p>
 			</p>
-		<i>En besked til borger om date og tid sendes til borgeren </i>
+		<a href="index.html"><-Tilbage</a>
 		<hr>
 
-		<b>ID</b>: {{ outputTlfData.id }}
-					<br>
+		<!-- <b>ID</b>: {{ outputTlfData.id }} -->
 					<b>Tlf</b>: {{ outputTlfData.tlf }}
 					<br>
-					<b>Navn</b>: {{ outputTlfData.navn }}
+					<b>Navn</b>:
+        <!-- <input v-model="outputTlfData.navn" type="text" placeholder="Indtast navn..." class="small" aria-describedby="navn">
+        <button v-on:click="navnInput(id, navn)" type="button" class="small">Gem</button>
+		<br>-->
+        {{ outputTlfData.navn }}
+
 					<br>
 				<!-- </div> -->
 				<hr>
@@ -47,25 +57,27 @@
 		<p class="mb-0">Dine registreringer</p>
 	</blockquote>
 	<button v-on:click="sendRegi(outputTlfData.id, 'ind')"
-	type="button" class="btn btn-success baggrund">Ind registrering</button>
+	type="button" class="btn btn-success baggrund">Check ind</button>
 	<!-- {{	this.borgerRegistreringer.ind  }} -->
 	<br>
 	<br>
 	<button v-on:click="sendRegi(outputTlfData.id, 'ud')"
-	type="button" class="btn btn-primary baggrund">Ud registrering</button>
+	type="button" class="btn btn-primary baggrund">Check ud</button>
 	<!-- {{	this.borgerRegistreringer.ud  }} -->
 		<br>
 		<br>
 	<div class="row">
 		<div v-for="regi in registrArray" class="col-sm-4">
 			<div class="card">
-				 <!-- Conditionally render Indregistreringer if Udregistreringer is not present -->
-				 <div v-if="!regi.ud" class="border border-success">
-					<b>Ind-regi:</b>
+				 <!-- Conditionally render check ind if check ud is not present -->
+				 <b>Check-ind</b>
+				 <div class="border border-success">
+					<!-- <b>Check-ind:</b> -->
 					{{ regi.ind }}
-				</div>
-				<div v-else class="border border-primary">
-					<b>Ud-regi:</b>
+			</div>
+				<b>Check-ud</b>
+				<div class="border border-primary">
+					<!-- <b>Check-ud:</b> -->
 					{{ regi.ud }}
 				</div>
 			</div>
@@ -78,12 +90,12 @@
 		<p class="mb-0">Dine pauser</p>
 	</blockquote>
 	<button v-on:click="sendPause(outputTlfData.id, 'pauseStart')"
-	type="button" class="btn btn-info baggrund">Pause start</button>
+	type="button" class="btn btn-info baggrundPause">Pause start</button>
 	<!-- {{ borgerPauser.pauseStart }} -->
 	<br>
 	<br>
 	<button v-on:click="sendPause(outputTlfData.id, 'pauseSlut')"
-	type="button" class="btn btn-secondary baggrund">Pause slut</button>
+	type="button" class="btn btn-warning baggrundPause">Pause slut</button>
 	<!-- {{ borgerPauser.pauseSlut }} -->
 		<br>
 		<br>
@@ -92,11 +104,30 @@
 				<!-- Conditionally render Pause information -->
 				<!-- Conditionally render pauseStart if pauseSlut is not present -->
 				<div class="card">
-					<div v-if="!pause.pauseSlut" class="border border-secondary">
-						<b>Start-pause:</b> {{  pause.pauseStart }}
+					<b>Start</b>
+					<div class="border border-info">
+						<!-- ID: {{  pause.pauseID }} -->
+						{{  pause.pauseStart }}
+						<div class="d-flex flex-row-reverse">
+							<div class="p-2">
+			<!-- <button v-on:click="sletPause(id, pause.pauseID)"
+			class="btn"><i class="fa fa-trash"></i></button> -->
+							</div>
+							<div class="p-2"></div>
+							<div class="p-2"></div>
+						  </div>
 					</div>
-					<div v-else class="border border-info">
-						<b>Slut-pause:</b> {{ pause.pauseSlut }}
+					<b>Slut</b>
+					<div class="border border-warning">
+						<!-- ID: {{ pause.pauseID }} -->
+						{{ pause.pauseSlut }}
+						<div class="d-flex flex-row-reverse">
+							<div class="p-2">
+							</div>
+							<div class="p-2"></div>
+							<div class="p-2"></div>
+						  </div>
+
 					</div>
 				</div>
 				<br>
@@ -108,10 +139,6 @@
 	<br>
 	<br>
 		<div class="col-6-sm">
-				<!-- <div class="watermarked">
-				     <img class="watermarked" src="img/online.jpg">
-				</div> -->
-		</div>
 		</div>
 	</div>
 	<!-- Javascript-reference -->

@@ -7,6 +7,8 @@ const app = Vue.createApp({
 			tlf: "",
 			id: 0,
 			outPutMessage: "",
+			success: "",
+    		error: "",
 		}
     },
 	created(){ // life cycle method. Called when browser reloads page
@@ -16,12 +18,13 @@ const app = Vue.createApp({
 		async getByTlfBorger(tlf){
 		try{
 		  //valider tlf nr
-		  const tlfPattern = /^[0-9]{3}[0-9]{2}[0-9]{3}$/;
-		  if(!tlfPattern.test(this.tlf)){
-			alert("Fejl! Indtast et tlf.nr. i det korekte format: XXXXXXXX");
-			return;
+		if (this.tlf.match(/^[0-9]{8}$/)) {
+			this.success = 'Success! Du bliver nu logget ind!';
+        	this.error = '';
+		  } else {
+			this.success = '';
+        	this.error = 'Fejl! Nr. skal være 8 tal!';
 		  }
-		  console.log("tlf.nr er korrekt:", this.tlf);
 		  const result = await axios.post(baseUrl + "/" + tlf + "/" + "BorgerTlf?tlf=" + tlf,
 		  { tlf: this.tlf });
 		  console.log(result.data);

@@ -5,10 +5,12 @@ const BorgerRegi = Vue.createApp({
         return {
             borgerTlfArray: [], //tomt array til at indeholde data omkring borgere
 			outputTlfData: "",
+			navn: "",
 			registrArray: [], //tomt array til registreringerne
 			pauseArray: [], //tomt array til pauser
 			borgerRegistreringer:
 			{
+				regiID: 0,
 			     ind: null,
 				 ud: null,
 			},
@@ -16,16 +18,17 @@ const BorgerRegi = Vue.createApp({
 			state: "not working",
 			borgerPauser:
 			{
+				pauseID: 0,
 				pauseStart: null,
 				pauseSlut: null,
 			},
 			//info fra backend, spørge serveren om
 			statePause: "pause not started",
-
 			tlf: "",
 			id: 0,
 			//borgerID: 0,
 			addMessage: "",
+			outPut: "",
 		}
     },
 	created(){ // life cycle method Called when browser reloads page
@@ -80,7 +83,7 @@ const BorgerRegi = Vue.createApp({
 
 			if(this.state === 'not working'){
 				  if(buttenClicked === 'ind'){
-					this.borgerRegistreringer.ind = " Dato: " + dato + " - " + " Tid: " + tid;
+					this.borgerRegistreringer.ind = "dato: " + dato + " - " + "tid: " + tid;
 					this.borgerRegistreringer.ud = null; // Reset 'ud' if only 'ind' is set
 					//du er nu indregistreret og din status er working
 					this.state = "working";
@@ -91,13 +94,13 @@ const BorgerRegi = Vue.createApp({
 		    	    }
 				    //sætte pause ind
 				    else if(buttenClicked === 'ud' || buttenClicked === 'pauseSlut'){
-					alert("Du kan ikke udregistrere/slutte en pause, før du er indregistreret!")
+					alert("Du kan ikke checke-ud, før du er checket-ind!")
 				}
 			}
 			else if(this.state === 'working'){
 				if(buttenClicked === 'ud'){
 					this.borgerRegistreringer.ind = null; // Reset 'ind' if only 'ud' is set
-					this.borgerRegistreringer.ud = " Dato: " + dato + " - " + " Tid: " + tid;
+					this.borgerRegistreringer.ud = "dato: " + dato + " - " + "tid: " + tid;
 					//trykket ud - state ændres til ikke på arbejde
 					this.state = "not working";
 					//borgerens id, send et borgerregi obj. her sender den det/post
@@ -109,7 +112,7 @@ const BorgerRegi = Vue.createApp({
 		    }
 				//sætte pause ind
 				else if(buttenClicked === 'ind'){
-					alert("Du er allerede indregistreret!")
+					alert("Du er allerede checket-ind!")
 				}
 			}
 			// 	//borger skal ikke kunne logge sig ud, før man er logget ind
@@ -141,7 +144,7 @@ const BorgerRegi = Vue.createApp({
 			//are of the same type and have the same value, === returns true.
 			if (this.statePause === 'pause not started') {
 				if (buttonClicked === 'pauseStart') {
-					this.borgerPauser.pauseStart = " Dato: " + dato + " - " + " Tid: " + tid;
+					this.borgerPauser.pauseStart = "dato: " + dato + " - " + "tid: " + tid;
 					this.borgerPauser.pauseSlut = null; // Reset 'PauseSlut' if only 'PauseStart' is set
 					//pausen er nu startet
 					this.statePause = "pause started"
@@ -158,7 +161,7 @@ const BorgerRegi = Vue.createApp({
 			else if (this.statePause === 'pause started') {
 				if(buttonClicked === 'pauseSlut'){
 					this.borgerPauser.pauseStart = null;// Reset 'pauseStart' if only 'PauseSlut' is set
-					this.borgerPauser.pauseSlut = " Dato: " + dato + " - " + " Tid: " + tid;
+					this.borgerPauser.pauseSlut = "dato: " + dato + " - " + "tid: " + tid;
 					//state: pausen er nu afsluttet
 					this.statePause = "pause not started"
 					//send data pauser regi til serveren
@@ -175,6 +178,22 @@ const BorgerRegi = Vue.createApp({
 			console.log("Slut: " + this.borgerPauser.pauseSlut);
 			console.log(this.pauseArray)
 		},
+		///navnInput - igang på den anden side,
+		//slet pause
+		async sletPause(id, pauseID){
+			console.log(this.deletePause)
+			try{
+				const response = await axios.delete(`${baseUrl}/${id}/BorgerPauser?pauseID=${pauseID}`, this.deletePause)
+				this.deletePause = response.status + response.statusText
+				console.log(baseUrl + "/" + id +"/" + "BorgerPauser?pauseID=" + pauseID, this.deletePause)
+				await this.getAllPauserBorger(id)
+			}
+			catch(ex){
+				alert("Fejl, kan ikke slette en pause! " + ex.message);
+			}
+
+		}
+
 	}
 })
 BorgerRegi.mount("#BorgerRegi") //her bliver appen mounted

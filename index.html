@@ -17,31 +17,33 @@
 
 <body>
 	<div id="app" class="container">
-		<h3 class="display-3 text-center text-white">Login borger</h3>
+		<h3 class="display-3 text-center">Login</h3>
 		<hr>
 <div class="row">
 	<div class="col-3"></div>
-		<div class="col-6 shadow-lg p-3 bg-body border border-white rounded">
+		<div class="col-6 shadow-lg p-3 bg-body border border-dark rounded">
+			<b><p>Velkommen til Værkstedet</p>
+			</b>
 			<div id="message">
-				Input feltet skal indeholde:
-				<br>
-				<i id="number" class="invalid">- Numre</i>
-				<br>
-				<i id="length" class="invalid">- 8 cifre</i>
+				<i id="number" class="invalid"></i>
+				<i id="length" class="invalid"></i>
 			  </div>
-			  <br>
 			<form @submit.prevent="getByTlfBorger(tlf)">
+				<!-- password: stjerner for at skjule nr -->
 				<div class="form-group">
-					<label for="tlf"><b>Tlf. Nummer:</b></label>
-					<input v-model="tlf" type="password" placeholder="Indtast tlf..."
-					class="form-control" id="tlflogin" aria-describedby="tlf"
-					pattern="[0-9]{3}[0-9]{2}[0-9]{3}"
-					title="Skal indeholde formatet XXXXXXXX" required>
-
+					<label for="tlf">
+						<!-- <b>Tlf. Nummer:</b> -->
+						<b>Log ind med dit 8 cifrede telefonnummer:</b>
+					</label>
+					<input id="tlflogin" v-model="tlf" type="password" placeholder="Indtast tlf..."
+					class="form-control" aria-describedby="tlf"
+					pattern="[0-9]{8}" title="Skal indeholde 8 cifre" required>
 				</div>
-				<button type="submit" class="btn btn-success">Log ind</button>
+				<button id="btntlflogin" type="submit" class="btn btn-info">Log ind</button>
+				<p v-if="success" class="success">{{ success }}</p>
+				<p v-if="error" class="error">{{ error }}</p>
 			</form>
-			{{ outPutMessage }}
+			<!-- {{ outPutMessage }} -->
 		</div>
 	<div class="col-3">
 	</div>
@@ -49,8 +51,8 @@
 <div class="row">
 	<div class="col-3">
 		</div>
-			<div class="col-6 p-2 border border-white rounded">
-				<img src="img/ros.png" class="img-fluid" alt="Responsive image">
+			<div class="col-6 p-2 border border-dark rounded">
+				<img id="imgRoskildeKommune" src="img/ros.png" class="img-fluid" alt="Responsive image">
 			</div>
 		<div class="col-3"></div>
 </div></div>

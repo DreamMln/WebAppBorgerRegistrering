@@ -1,11 +1,9 @@
 body {
-	background-image: url('img/D.png');
+	background-color: rgb(245, 237, 252);
   }
-  h3 {
-	text-shadow: 2px 2px #015c27;
-  }
-  h2 {
-	text-shadow: 2px 2px #097536;
+
+  h1, h2, h3 {
+	text-shadow: 2px 2px #ffffff;
   }
 	.img-fluid {
 		min-width: 100%;
@@ -18,15 +16,17 @@ body {
 /* ////LOGIN///// */
 
 button.baggrund{
-	background-color: rgb(212, 238, 212);
-	color: black;
+	background-color: rgb(124, 58, 247);
+	color: rgb(255, 255, 255);
+	border: #f1f5b1;
+
+}
+button.baggrundPause{
+	background-color: rgb(52, 38, 247);
+	color: rgb(255, 255, 255);
 
 }
 
-/* div.col.baggrund{
-	border: 1px;
-	background-color: rgb(212, 238, 212);
-} */
 .container {
 	position: relative;
 	margin: 0 auto; /* Center it */
@@ -42,16 +42,3 @@ button.baggrund{
 	padding: 20px; /* Some padding */
   }
 
-
-  .watermarked {
-	display: block;
-	width: 100%;
-	height: 100%;
-	position: absolute;
-	top: 42px;
-	left: 0px;
-	background-size: 100px 100px;
-	background-position: 30px 30px;
-	background-repeat: no-repeat;
-	opacity: 0.2;
-  }
